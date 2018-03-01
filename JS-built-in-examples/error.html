@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title> Reduce </title>
+<!DOCTYPE html><html><head><meta charset="utf-8"><title> Error </title>
 <link rel="shortcut icon" href="https://cdn0.iconfinder.com/data/icons/set-app-incredibles/24/Configuration-2-01-128.png"/>
 <style media="screen">
   .code {
@@ -16,39 +16,27 @@
   <a href="file:///Users/robbobfrh84/Github/jsHelper/JS-built-in-examples/filter.html">Filter</a> ::
   <a href="file:///Users/robbobfrh84/Github/jsHelper/JS-built-in-examples/reduce.html">Reduce</a> ::
   <a href="file:///Users/robbobfrh84/Github/jsHelper/JS-built-in-examples/error.html">Error</a> ::
-  <a href="file:///Users/robbobfrh84/Github/jsHelper/JS-built-in-examples/promise.html">Promise</a> ::
-  <h3> Reduce </h3>
+  <a href="file:///Users/robbobfrh84/Github/jsHelper/JS-built-in-examples/promise.html">Promise</a> ::  <h3> Errors </h3>
   <li>  <em>...*See Console for code results and .html file for source code.</em> </li>
-  <li>  <a href="https://medium.com/@joomiguelcunha/learn-map-filter-and-reduce-in-javascript-ea59009593c4"> Resource </a></li>
 <script>
 
-/* ONE --- *** --- *** --- *** --- *** --- *** */
-
 (()=>{
 
-  const arr = [1,2,3,4]
+  const word = 'hello'
 
-  const sum = arr.reduce( (acc, currValue, currIndex, array) => {
-    return acc + currValue
-  }, 0)
+  try {
+    word.push(' world')
+  }
+  catch (error) {
+    console.log(error)
+  }
 
-  const arrSum = sum / arr.length
+  console.log('But we get to continue on... to show how we could not')
 
-  console.log('arrSum: ',arrSum)
+  word.push(' world')
 
-})();
+  console.log('Will NOT Log This :-(')
 
-/* Bob Example --- *** --- *** --- *** --- *** --- *** */
-
-(()=>{
-
-  const arr = [33,5,8,23,16]
-
-  const ave = (arr) => { return arr.reduce( (a,v) => a + v ) / arr.length }
-
-  const aveArr = ave(arr)
-
-  console.log('aveArr: ',aveArr)
 
 })();
 
