@@ -6,6 +6,11 @@ class canvas {
     this.ctx.canvas.height = height
   }
 
+  resize (width, height) {
+    this.ctx.canvas.width = width
+    this.ctx.canvas.height = height
+  }
+
   line (startX, startY, endX, endY, strokeColor, lineWidth) {
     this.ctx.beginPath()
     this.ctx.moveTo(startX, startY)
@@ -66,7 +71,7 @@ class canvas {
   }
 
   lGrad (obj, g = obj.gradient, cols = obj.colors ) {
-    var gradient = c9.ctx.createLinearGradient(g[0],g[1],g[2],g[3])
+    var gradient = this.ctx.createLinearGradient(g[0],g[1],g[2],g[3])
     for (const c of cols) {
       gradient.addColorStop( c[0], c[1] )
     }
