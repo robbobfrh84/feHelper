@@ -66,10 +66,10 @@ const showOff = (phone)=>{
 
 // call our promise
 const askMom = ()=>{
-    willIGetNewPhone
-        .then(showOff)
-        .then(fulfilled => console.log('fulfilled: ',fulfilled)) // fat arrow
-        .catch(error => console.log(error.message)); // fat arrow
+  willIGetNewPhone
+    .then(showOff)
+    .then(fulfilled => console.log('fulfilled: ',fulfilled)) // fat arrow
+    .catch(error => console.log(error.message)); // fat arrow
 };
 
 askMom();

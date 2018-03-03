@@ -1,7 +1,13 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"><title> Tester </title></head>
 <style> .bg { background: #ddd; margin: auto;} </style>
 <script src="canvas.js"></script>
+
+<strong>Example start, using c as the class name 'const': </strong><br> <br>
+const c = new canvas <br>
+c.new('myCanvas', 400, 200) <br> <br>
+
 <div> InnerHtml Script  <button onclick='ch.clear()' class='bg'> clear </button> </div>
+
 <canvas id="myCanvasHtml" class='bg'>
   <script>
     const ch = new canvas
@@ -12,30 +18,35 @@
   </script>
 </canvas>
 
-<hr><div> line (startX, startY, endX, endY, strokeColor, lineWidth) </div>
+<hr><div> c.line(startX, startY, endX, endY, strokeColor, lineWidth) </div>
 <canvas id="myCanvas" class='bg'></canvas>
 
-<hr><div> cir (centerX, centerY, radius, fillColor, lineWidth, strokeColor) {
+<hr><div> c.cir(centerX, centerY, radius, fillColor, lineWidth, strokeColor) {
 <br>  arc (p1, p2, centerX, centerY, radius, fillColor, lineWidth, strokeColor) { </div>
 <canvas id="myCanvas2" class='bg'></canvas>
 
-<hr><div> rec (startX, startY, endX, endY, fillColor, lineWidth, strokeColor) { </div>
+<hr><div> c.rec(startX, startY, endX, endY, fillColor, lineWidth, strokeColor) { </div>
 <canvas id="myCanvas3" class='bg'></canvas>
 
-<hr><div> text (content, x, y, font, style) { </div>
+<hr><div> c.text(content, x, y, font, style) { </div>
 <canvas id="myCanvas4" class='bg'></canvas>
 
-<hr><div> Straight: path (startX, startY, points, lineWidth, strokeColor, fillColor) { </div>
+<hr><div> Linear: c.path(startX, startY, *'l'points, lineWidth, strokeColor, fillColor) { </div>
 <canvas id="myCanvas5" class='bg'></canvas>
 
-<hr><div> Quadratic: path (startX, startY, points, lineWidth, strokeColor, fillColor) { </div>
+<hr><div> Quadratic: c.path(startX, startY, *'q'points, lineWidth, strokeColor, fillColor) { </div>
 <canvas id="myCanvas6" class='bg'></canvas>
 
-<hr><div> Bezier: path (startX, startY, points, lineWidth, strokeColor, fillColor) { </div>
+<hr><div> Bezier: c.path(startX, startY, *'b'points, lineWidth, strokeColor, fillColor) { </div>
 <canvas id="myCanvas7" class='bg'></canvas>
 
-<hr><div> Scale: path (startX, startY, points, lineWidth, strokeColor, fillColor) { </div>
+<hr><div> Scale: c.scale(x,y) { </div>
 <canvas id="myCanvas8" class='bg'></canvas>
+
+<hr><div>
+  Linear Gradient Color(Line): c.lGrad( *gradientObj ) {
+  </div>
+<canvas id="myCanvas9" class='bg'></canvas>
 
 <script>
 
@@ -88,7 +99,7 @@
   ], 4, 'cornflowerblue')
 
   //quadratic curve
-  var c6 = new canvas
+  const c6 = new canvas
   c6.new('myCanvas6', 400,200)
   c6.path(75,25, [
     ['q', 25, 25, 25, 62.5],
@@ -100,7 +111,7 @@
   ])
 
   //bezier curve
-  var c7 = new canvas
+  const c7 = new canvas
   c7.new('myCanvas7', 400,200)
   c7.path(75,40, [
     ['b', 75, 37, 70, 25, 50, 25],
@@ -112,11 +123,40 @@
   ])
 
   // scale
-  var c8 = new canvas
+  const c8 = new canvas
   c8.new('myCanvas8', 400,200)
   c8.line(6,30,180,80, 'red', 3)
   c8.scale(2,2)
   c8.line(6,30,180,80, 'red', 3)
+
+  // Linear Gradient Color
+  const c9 = new canvas
+  c9.new('myCanvas9', 400,200)
+  c9.line(10,20,380,20, 'red', 10)
+
+  let color = c9.lGrad({
+    gradient: [ 0, 0, 380, 0],
+    colors: [
+      [ "0", "green" ],
+      [ "0.5", "blue"],
+      [ "1", "red"]
+    ]
+  })
+
+  c9.line(10,50,380,50, color, 10)
+
+  color = c9.lGrad({
+    gradient: [ 0, 0, 380, 0],
+    colors: [
+      [ "0.1", "rgba(0,0,0,0)" ],
+      [ "0.3", "green"],
+      [ "0.6", "blue"],
+      [ "0.8", "red"],
+      [ "0.9", "rgba(0,0,0,0)" ],
+    ]
+  })
+
+  c9.line(10,80,380,80, color, 10)
 
   // clear
   // c.clear()
