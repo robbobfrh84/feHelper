@@ -1,5 +1,9 @@
 class canvas {
 
+  constructor () {
+    this.sprites = []
+  }
+
   new (id, width, height) {
     this.ctx = document.getElementById(id).getContext('2d')
     this.ctx.canvas.width = width
@@ -80,6 +84,39 @@ class canvas {
 
   clear () {
     this.ctx.clearRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height)
+  }
+
+/* * * * * * * * * * * * * * * * * ANIMATE * * * * * * * * * * * * * * * * * */
+
+  lineGrow (x,y,ex,ey,c,stk,s,r) {
+    const [ xd, yd ] = [ x > ex ? -1 : 1, y > ey ? -1 : 1 ]
+    const [ absX, absY ] = [ Math.abs(x-ex), Math.abs(y-ey) ]
+    const [ xr, yr ] = absX > absY ? [absY/absX,1] : [1,absX/absY]
+    let [ xPx, yPx ] = [ x === ex ? 0 : xd * yr, y === ey ? 0 : yd * xr ]
+    this.sprites.push({
+      x:x, y:y, ex:ex, ey:ey, c:c, stk:stk, s:s, r:r,
+      xp: x,yp: y,xd: xd,yd: yd,
+      xPx: isFinite(xPx) ? xPx : 1*xd,
+      yPx: isFinite(yPx) ? yPx : 1*yd,
+      active: true,
+    })
+  }
+
+  animate (end = true) {
+    this.clear()
+    for (const s of this.sprites) {
+      [ s.xp, s.yp ] = [ s.xp + (s.xPx*s.s), s.yp + (s.yPx*s.s) ]
+      if ((s.yd === 1 && s.yp < s.ey) || (s.yd === -1 && s.yp > s.ey)
+      ||  (s.xd === 1 && s.xp < s.ex) || (s.xd === -1 && s.xp > s.ex)) {
+        this.line(s.x,s.y,s.xp,s.yp,s.c,s.stk)
+        end = false
+      } else {
+        this.line(s.x,s.y,s.ex,s.ey,s.c,s.stk)
+      }
+    }
+    if (!end) {
+      window.requestAnimationFrame(()=>{this.animate()})
+    }
   }
 
 }
