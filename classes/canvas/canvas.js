@@ -2,6 +2,7 @@ class canvas {
 
   constructor () {
     this.sprites = []
+    this.staticSprites = []
   }
 
   new (id, width, height) {
@@ -102,8 +103,11 @@ class canvas {
     })
   }
 
-  animate (end = true) {
+  animate () {
+    let end = true
     this.clear()
+    this.staticSprites.map( x => x() )
+    this.sprites.map(x => { x.xPx*=x.r, x.yPx*=x.r })
     for (const s of this.sprites) {
       [ s.xp, s.yp ] = [ s.xp + (s.xPx*s.s), s.yp + (s.yPx*s.s) ]
       if ((s.yd === 1 && s.yp < s.ey) || (s.yd === -1 && s.yp > s.ey)
@@ -113,6 +117,9 @@ class canvas {
       } else {
         this.line(s.x,s.y,s.ex,s.ey,s.c,s.stk)
       }
+    }
+    for (const s of this.staticSprites) {
+      s()
     }
     if (!end) {
       window.requestAnimationFrame(()=>{this.animate()})
