@@ -37,7 +37,7 @@ class canvas {
     if (lineWidth) this.ctx.stroke() // flipp .stroke() & .fill() to put fill on top, making it static rather than 1/2 covered by stroke
   }
 
-  rec (startX, startY, endX, endY, fillColor, lineWidth, strokeColor) {
+  rec (startX, startY, endX, endY, fillColor, lineWidth, strokeColor, close) {
     this.ctx.beginPath()
     this.ctx.rect(startX, startY, endX, endY)
     this.paint( lineWidth || 0, strokeColor || 'black', fillColor || 'black' )
@@ -56,6 +56,7 @@ class canvas {
 
     this.paint( lineWidth || 1, strokeColor || 'black', fillColor || 'black'  )
     if (fillColor) this.ctx.fill()
+    if (close) this.ctx.closePath();
     this.ctx.stroke()
   }
 
