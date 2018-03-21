@@ -1,11 +1,11 @@
 // get random max min.
-function random(min, max) {
+random = (min, max)=>{
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 x = random(20,40)
 
 //!!! used with random(). Returns 3 0-to-255 random numbers to be used for random color.
-function rgbR(){
+rgbR = ()=>{
   return 'rgb('+random(0,255)+', '+random(0,255)+', '+random(0,255)+')';
 }
 
