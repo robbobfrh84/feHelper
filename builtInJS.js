@@ -8,8 +8,10 @@ str.split('-') // >Arr. Splits str at -
 str.split(/[.\[\]]/) // >Arr removes . [ ]
 "Obj.str2[1].more".split(/[.\[\]]/).filter(Boolean) // >Arr removes . [ ] But! with this string it'll leave a dead "", the filter removes that.
 JSON.parse(data) // > Object from string of data.
+//--- SORT
 arr.sort(); // >Array
 arr.sort(function(a,b){return b - a}); //sorts an array followed by sort in reverse in reverse order.
+colors.sort((a,b) =>  a.name < b.name ? -1 : 1 ) //sorts objects in array by key value of object
 
 /******** DataTypes (changing / descovering)*******/
 parseInt(stringLiteralAsNumber) // >Intiger. converts string num to intiger.
