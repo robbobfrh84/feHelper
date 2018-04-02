@@ -9,5 +9,9 @@ rgbR = ()=>{
   return 'rgb('+random(0,255)+', '+random(0,255)+', '+random(0,255)+')';
 }
 
+rgbAR = (a)=>{
+  return 'rgb('+random(0,255)+', '+random(0,255)+', '+random(0,255)+','+a+')';
+}
+
 //Returns the base-16 equivalent 0-16777215 in base 10.
 '#'+Math.floor(Math.random()*16777215).toString(16);
