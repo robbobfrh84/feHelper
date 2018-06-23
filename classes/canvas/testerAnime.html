@@ -40,7 +40,7 @@
         [ "0.95", "rgba(0,0,0,0)" ],
       ]
     })
-    c1.lineGrow(50,90,350,110,color,25,1,1.1)
+    c1.lineGrow(50,90,350,110,color,25,1,1.03)
 
     c1.animate()
   </script>
@@ -77,13 +77,69 @@
     c3.lineGrow(10,20,390,20,'rgba(100,149,237,0.7)',3,2,1.01)
     c3.lineGrow(10,30,390,30,'rgba(100,149,237,0.7)',3,2,1.02)
 
-    c3.staticSprites = [
-      ()=>{ c3.rec(20,70,120,80,'firebrick',5,'cornflowerblue') },
-      ()=>{ c3.cir(280,100,30,'green',10,'#444') }
-    ]
+    c3.sprites = c3.sprites.concat([
+      { build: (s)=>{ c3.rec(20,70,120,80,'firebrick',5,'cornflowerblue') }},
+      { build: (s)=>{ c3.cir(280,100,30,'green',10,'#444') }}
+    ])
 
     c3.animate()
   </script>
 </canvas>
 
+<hr><div> c4: Move </div>
+<canvas id="c4" class='bg'>
+  <script>
+    const c4 = new canvas
+    c4.new('c4', 400,200)
+
+
+    c4.sprites.push({
+      active: true,
+      x: 20,
+      y: 50,
+      r: 10,
+      ex: 100,
+      ey: 50,
+      s: 1,
+      build: (s)=>{
+        if (s.x !== s.ex) {
+          s.x = s.x + s.s
+          // c4.cir(s.x,s.y,s.r,'cornflowerblue', 3, 'blue')
+          c4.end = false
+        }
+        c4.cir(s.x,s.y,s.r,'cornflowerblue', 3, 'blue')
+
+
+        // console.log(c4.end)
+      }
+      // c:c,
+      // stk:stk,
+      // s:s,
+      // r:r,
+      // xp: x,
+      // yp: y,
+      // xd: xd,
+      // yd: yd,
+      // xPx: isFinite(xPx) ? xPx : 1*xd,
+      // yPx: isFinite(yPx) ? yPx : 1*yd,
+    })
+
+    // static builds.
+    c4.sprites.push({
+      build: (s)=>{ c4.cir(20,20,10,'firebrick', 3, 'red') }
+    })
+
+    var c4c = document.getElementById('c4')
+    c4c.addEventListener('click', ()=>{
+      console.log('click', event.offsetX, event.offsetY)
+      c4.sprites[0].ex = event.offsetX
+      if (c4.end) c4.animate()
+    })
+
+
+    c4.animate()
+  </script>
+</canvas>
+
 </html>
+<script src='http://localhost:35729/livereload.js'></script>
