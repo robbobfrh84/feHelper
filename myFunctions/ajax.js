@@ -12,3 +12,31 @@ _GET = (url, callback)=>{
 _GET(url, (data)=>{
   _myCallback(data)
 })
+
+
+// ALTERNATIVE WITH PROMISE (Needs to be tested and cleaned)
+
+// _get = (url)=>{
+//
+//   return new Promise((res, rej) => {
+//     _loaderOn()
+//     let xhr = new XMLHttpRequest();
+//     xhr.open('GET', url, true);
+//     xhr.onreadystatechange = function () {
+//       if (this.readyState == 4) {
+//         if (this.status == 200) {
+//           res(xhr.responseText)
+//         } else {
+//           rej(xhr)
+//         }
+//       }
+//     }
+//     _loaderOff()
+//     xhr.send(null)
+//   })
+//
+// }
+
+// _get(url)
+//   .then(payload => callback(payload))
+//   .catch(err => alert('! Problem retrieving data !\n\n'+err))
