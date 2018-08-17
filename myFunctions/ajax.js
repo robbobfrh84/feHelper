@@ -39,4 +39,4 @@ _GET(url, (data)=>{
 
 // _get(url)
 //   .then(payload => callback(payload))
-//   .catch(err => alert('! Problem retrieving data !\n\n'+err))
+//   .catch(err => console.log('! Problem retrieving data !\n\n'+err))
