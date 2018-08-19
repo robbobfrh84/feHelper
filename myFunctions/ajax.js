@@ -42,5 +42,5 @@ _GET(url, (data)=>{
 // _get(url)
 //   .then(payload => callback(payload))
 //   .catch(err => console.log('! Problem retrieving data !\n\n'+err))
-//   .finally(data => console.log('Refresh page to try again try again.'))
+//   .finally(data => console.log('this function fires always. Good for loading annimation turnoffs'))
 
