@@ -16,6 +16,8 @@ _GET(url, (data)=>{
 
 // ALTERNATIVE WITH PROMISE (Needs to be tested and cleaned)
 
+// Add "Promise all"
+
 // _get = (url)=>{
 //
 //   return new Promise((res, rej) => {
@@ -37,4 +39,6 @@ _GET(url, (data)=>{
 
 // _get(url)
 //   .then(payload => callback(payload))
-//   .catch(err => alert('! Problem retrieving data !\n\n'+err))
+//   .catch(err => console.log('! Problem retrieving data !\n\n'+err))
+//   .finally(data => console.log('this function fires always. Good for loading annimation turnoffs'))
+
