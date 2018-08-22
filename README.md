@@ -1,2 +1,2 @@
-# jsHelper
-A collection of useful functions and examples of built in Javascript functions. 
+# feHelper
+A collection of useful built in and custom Front-end functions, examples and demos.

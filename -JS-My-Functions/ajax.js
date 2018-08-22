@@ -19,7 +19,6 @@ _GET(url, (data)=>{
 // _get = (url)=>{
 //
 //   return new Promise((res, rej) => {
-//     _loaderOn()
 //     let xhr = new XMLHttpRequest();
 //     xhr.open('GET', url, true);
 //     xhr.onreadystatechange = function () {
@@ -31,7 +30,6 @@ _GET(url, (data)=>{
 //         }
 //       }
 //     }
-//     _loaderOff()
 //     xhr.send(null)
 //   })
 //
