@@ -12,7 +12,7 @@ _randId = (length)=>{
 
 // Alternate (for server-side / node / GAS )
 function Id_Generator(length) {
-  var m = m || 15; s = '', r = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  for (var i=0; i < m; i++) { s += r.charAt(Math.floor(Math.random()*r.length)); }
+  var length = length || 15; s = '', r = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  for (var i=0; i < length; i++) { s += r.charAt(Math.floor(Math.random()*r.length)); }
   return s;
 }
