@@ -9,3 +9,10 @@ _randId = (length)=>{
   }
   return generateId(length)
 }
+
+// Alternate (for server-side / node / GAS )
+function Id_Generator(length) {
+  var length = length || 15; s = '', r = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  for (var i=0; i < length; i++) { s += r.charAt(Math.floor(Math.random()*r.length)); }
+  return s;
+}
