@@ -72,6 +72,8 @@ OR window.date.now()
 /****     ES6+    ****/
 /*********************/
 
+Object.entries(obj).map(([key, val]) => `${key}=${val}`).join('&') // > String of URL query parameters 
+
 /******** Arrow Funcs *******/
 ( p1, p2 )=>{ expression }
 p1 => { expresison }

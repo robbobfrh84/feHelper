@@ -6,11 +6,17 @@
   <link rel="stylesheet" href="simpleLoader.css">
   <script src='simpleLoader.js'></script>
 </head>
-<body> <br><br><br>
+<body>
 
-<button onClick='startStop(event)'>STOP</button>
 
-<div class="sLoader" id='loader1'> <div></div><div></div><div></div> </div>
+<!--⭐️ Whatever Container your loader is put in, should be set as relative! -->
+<div class="relative">
+  <div class="sLoader" id='loader1'> <div></div><div></div><div></div> </div>
+</div>
+
+<br><br><br>
+<button onClick='_loader(event)'>STOP</button>
+
 
 </body>
 </html>
