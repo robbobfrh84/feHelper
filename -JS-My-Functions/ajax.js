@@ -9,36 +9,20 @@ _GET = (url, callback)=>{
   xhr.send(null)
 }
 
-_GET(url, (data)=>{
-  _myCallback(data)
+// EXAMPLE 👇
+var _example_url = 'https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,ra,dec&order=dec&format=JSON'
+
+_GET(_example_url, (data)=>{
+  console.log(data)
 })
 
+/* BARE-BONES
 
-// ALTERNATIVE WITH PROMISE (Needs to be tested and cleaned)
+var xhr = new XMLHttpRequest();
+xhr.open('GET', url, true);
+xhr.onreadystatechange = function () {
+  if (xhr.readyState == 4) { console.log(xhr) }
+}
+xhr.send(null)
 
-// Add "Promise all"
-
-// _get = (url)=>{
-//
-//   return new Promise((res, rej) => {
-//     let xhr = new XMLHttpRequest();
-//     xhr.open('GET', url, true);
-//     xhr.onreadystatechange = function () {
-//       if (this.readyState == 4) {
-//         if (this.status == 200) {
-//           res(xhr.responseText)
-//         } else {
-//           rej(xhr)
-//         }
-//       }
-//     }
-//     xhr.send(null)
-//   })
-//
-// }
-
-// _get(url)
-//   .then(payload => callback(payload))
-//   .catch(err => console.log('! Problem retrieving data !\n\n'+err))
-//   .finally(data => console.log('this function fires always. Good for loading annimation turnoffs'))
-
+*/
