@@ -1,9 +1,9 @@
 var _oldPage = 'home'
 
 _page = (page)=>{
-  const newPage = document.getElementById('page-'+page)
+  const newPage = document.getElementById(page)
   try {
-    document.getElementById('page-'+_oldPage).style.display = 'none'
+    document.getElementById(_oldPage).style.display = 'none'
     newPage.style.display = 'block'
     window.location.hash = '#'+page
     _oldPage = page

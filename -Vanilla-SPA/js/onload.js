@@ -1,7 +1,7 @@
 window.onload = ()=>{
   let setPage = window.location.hash
   setPage = setPage.split('#')[1]
-  if (setPage) _page(setPage)
+  setPage ? _page(setPage) : _page("home")
   _set_year_to_footer(document.getElementById('my-custom-footer'))
 }
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html><html>
+<head>
+  <title> Vanilla SPA </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- graphics  -->
+  <link rel="shortcut icon" href="gfx/cog.png"/>
+  <!-- css -->
+  <link rel="stylesheet" href="css/_main.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/full.css">
+</head>
+
+<body>
+
+  <component id="navbar"></component>
+  <page id='home'></page>
+  <page id='two'></page>
+  <page id='three'></page>
+  <component id="footer"></component>
+
+  <page id='full'></page>
+
+</body>
+<!-- js -->
+<script src='js/spa.js'></script>
+<script src='js/_main.js'></script>
+<!-- components -->
+<script src='components/navbar.js'></script>
+<script src='components/footer.js'></script>
+<!-- pages -->
+<script src='pages/home.js'></script>
+<script src='pages/two.js'></script>
+<script src='pages/three.js'></script>
+<script src='pages/full.js'></script>
+
+</html>
+<!-- // IDEA!!!
+// What if pages WITH nav bar have to call these elements???
+// THEN,  you could really incorperate your idea of removing pages
+// THEN THEN, css would only apply to whats  seen. NOT the  entire page.  -->
