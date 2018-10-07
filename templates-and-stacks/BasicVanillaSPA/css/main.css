@@ -1,0 +1,10 @@
+body {
+  background-color: gray;
+  height: 100%;
+}
+.float-right {
+  float: right;
+}
+.title {
+  text-align: center;
+}
