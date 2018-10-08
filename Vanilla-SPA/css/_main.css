@@ -2,9 +2,6 @@ body {
   background-color: #aaa;
   height: 100%;
 }
-page {
-  display: none;
-}
 .float-right {
   float: right;
 }
