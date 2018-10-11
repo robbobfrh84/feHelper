@@ -1,4 +1,4 @@
-let spa =  new Single_Page_Application
+const spa =  new Single_Page_Application
 
 window.onload = ()=>{
   spa.start()
