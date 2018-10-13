@@ -1,3 +1,11 @@
 #main {
   background-color: cornflowerblue;
 }
+
+.navBtn {
+  background-color: #ddd;
+}
+
+.navBtn-active {
+  background-color: #999;
+}

@@ -1,10 +1,32 @@
+* {
+  font-family: sans-serif;
+  font-weight: lighter;
+}
 body {
   background-color: #aaa;
   height: 100%;
+  margin: 0;
+}
+h3 {
+  margin: 0;
 }
 .float-right {
   float: right;
 }
-.title {
+.navPage {
+  /* margin: 0 2.5% 0 2.5%; */
+  padding: 50px;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+
   text-align: center;
+  /* width: 95%; */
+  max-width: 1200px;
+  margin: auto;
+  color: rgba(255,255,255,0.9);
+  font-size: 30px;
+  overflow: scroll;
+  position: absolute;
+  top: 0px; right: 0; bottom: 0px; left: 0;
+  z-index: -10;
 }
