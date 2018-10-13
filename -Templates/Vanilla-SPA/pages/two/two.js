@@ -1,10 +1,10 @@
-spa.page.home = (META, data)=>{
+spa.page.two = (META)=>{
   spa.component.navbar({preserve: true, id: "navbar"})
 
   spa.buildPage(META).innerHTML += `
-    <div id="main" class="navPage">
-      <h3> ⭐ Home ⭐ </h3>
-      This is styled by home's css
+    <div class="navPage" id='main'>
+      <h3 class='title'> Page Two </h3>
+      This is styled by two's css
       <hr><br><hr><br><hr><br><hr><br><hr><br><hr><br>
       <hr><br><hr><br><hr><br><hr><br><hr><br><hr><br>
     </div>

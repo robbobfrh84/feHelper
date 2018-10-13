@@ -1,6 +1,6 @@
-spa.component.footer = (arg, data)=>{
+spa.component.footer = (META)=>{
   const year = new Date
-  spa.buildComponent(arg).innerHTML += `
+  spa.buildComponent(META).innerHTML += `
     <footer id="main">  &copy; ${year.getFullYear()} Bob Main  </footer>
   `
 }

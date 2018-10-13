@@ -1,5 +1,6 @@
-spa.component.navbar = (ID, data)=>{
-  spa.buildComponent(ID).innerHTML += `
+spa.component.navbar = (META)=>{
+
+  spa.buildComponent(META).innerHTML += `
     <nav id="main">
       <div id="navBar">
         <button class='navBtn navBtn-active' name="home"> Home </button>
@@ -11,15 +12,23 @@ spa.component.navbar = (ID, data)=>{
       </div>
     </nav>
   `
+  
+  set_page_to_nav = (p)=>{
+    for (const btn of document.getElementsByClassName('navBtn')) {
+      btn.classList.remove('navBtn-active')
+      if (btn.name === spa.currentPage) {
+        btn.classList.add('navBtn-active')
+      }
+    }
+  }
 
   for (const button of document.getElementsByClassName('navBtn')) {
     button.onclick = function(event){
       spa.setPage(this.name)
-      for (const btn of document.getElementsByClassName('navBtn')) {
-        btn.classList.remove('navBtn-active')
-      }
-      this.classList.add('navBtn-active')
+      set_page_to_nav(this)
     }
   }
+
+  set_page_to_nav()
 
 }

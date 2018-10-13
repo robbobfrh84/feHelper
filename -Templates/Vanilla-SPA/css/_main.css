@@ -14,13 +14,10 @@ h3 {
   float: right;
 }
 .navPage {
-  /* margin: 0 2.5% 0 2.5%; */
   padding: 50px;
   padding-left: 2.5%;
   padding-right: 2.5%;
-
   text-align: center;
-  /* width: 95%; */
   max-width: 1200px;
   margin: auto;
   color: rgba(255,255,255,0.9);
