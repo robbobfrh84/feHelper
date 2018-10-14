@@ -18,7 +18,6 @@ class Single_Page_Application {
   }
 
   setPage(page, onload)  {
-    console.log('set?',page,onload);
     this.currentPage = page
     window.location.hash = '#'+page
     const params = {
@@ -29,7 +28,6 @@ class Single_Page_Application {
   }
 
   hashChange(event) {
-    console.log('hash', this.onload);
     const page = window.location.hash.split('#')[1]
     if (window.location.hash !== '#'+this.currentPage) {
       this.currentPage = window.location.hash.split('#')[1]
@@ -45,7 +43,6 @@ class Single_Page_Application {
   }
 
   buildPage(params) {
-    // console.log('page', params);
     const spaBody = document.getElementById('spaBody')
     if (params.fullPage) {
       while (spaBody.hasChildNodes()) {
@@ -60,11 +57,6 @@ class Single_Page_Application {
       }
     }
     let activePage = document.getElementById("activePage")
-    // if (activePage) {
-    //   const spaBody = document.getElementById('spaBody')
-    //   spaBody.removeChild(activePage)
-    //   activePage = false
-    // }
     if (!activePage) {
       activePage = document.createElement('div')
       activePage.id = 'activePage'
@@ -74,20 +66,11 @@ class Single_Page_Application {
     this.classSwap(params,activePage)
     this.addCss(params, 'pages')
     this.builtCss.push(params.id)
-
-    // if (!this.builtCss.includes(params.id)) {
-    //   this.addCss(params)
-    //   this.builtCss.push(params.id)
-    //   this.classSwap(params,activePage)
-    // } else if (this.previousCss !== params.id) {
-    //   this.classSwap(params,activePage)
-    // }
     return activePage
   }
 
   buildComponent(params) {
     params.parent = '.spa-css-'+params.id
-    // console.log('comp',params);
     if (params.preserve && document.getElementById(params.id)) {
       return false
     } else {
@@ -119,15 +102,6 @@ class Single_Page_Application {
       document.body.appendChild(img)
       img.src = dir+'/'+params.id+'/'+params.id+'.css'
       this.builtCss.push(params.id)
-
-      //
-      //
-      //
-      //
-      //
-      // spa.localizeCssSheet(params, dir)
-      // this.builtCss.push(params.id)
-
     }
   }
 
@@ -139,25 +113,6 @@ class Single_Page_Application {
         sheet = document.styleSheets[i]
       }
     }
-
-    // const cssDir = 'link[href="'+dir+'/'+params.id+'/'+params.id+'.css"]'
-    // console.log(cssDir);
-    // console.log(document.querySelector(cssDir));
-    // const sheet = document.querySelector(cssDir)
-
-    // let styles = document.styleSheets
-    // // console.log(styles);
-    // for (const style of styles) {
-    //   // style.id = 'style-'+params.id
-    //   if (style.href.split('/'+params.id+'.css').length > 1) {
-    //     console.log(params.id);
-    //     sheet = style
-    //   }
-    //
-    // }
-
-
-    console.log(sheet);
     const len = sheet.cssRules.length
     for (var i = 0; i < len; i++) {
       const rule = sheet.cssRules[i].cssText

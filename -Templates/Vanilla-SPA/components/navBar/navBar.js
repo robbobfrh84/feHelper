@@ -14,10 +14,7 @@ spa.component.navbar = (META)=>{
   `
 
   set_page_to_nav = ()=>{
-    console.log('\n')
-    console.log(META);
     for (const btn of document.querySelectorAll(META.parent+" .navBtn")) {
-      console.log('btn navbar: ',btn);
       btn.classList.remove('navBtn-active')
       if (btn.name === spa.currentPage) {
         btn.classList.add('navBtn-active')
@@ -31,8 +28,6 @@ spa.component.navbar = (META)=>{
       set_page_to_nav(this)
     }
   }
-
-  console.log('navBar');
 
   set_page_to_nav()
 
