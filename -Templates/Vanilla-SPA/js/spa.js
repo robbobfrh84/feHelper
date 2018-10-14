@@ -18,23 +18,34 @@ class Single_Page_Application {
   }
 
   setPage(page, onload)  {
+    console.log('set?',page,onload);
     this.currentPage = page
     window.location.hash = '#'+page
-    if (onload) spa.page[page]({id: page})
+    const params = {
+      id: page,
+      parent: ".spa-css-"+page
+    }
+    if (onload) spa.page[page](params)
   }
 
   hashChange(event) {
+    console.log('hash', this.onload);
     const page = window.location.hash.split('#')[1]
     if (window.location.hash !== '#'+this.currentPage) {
       this.currentPage = window.location.hash.split('#')[1]
     }
     if (!this.onload) {
-      this.page[this.currentPage]({id: this.currentPage})
+      const params = {
+        id: page,
+        parent: ".spa-css-"+this.currentPage
+      }
+      this.page[this.currentPage](params)
     }
     this.onload = false
   }
 
   buildPage(params) {
+    // console.log('page', params);
     const spaBody = document.getElementById('spaBody')
     if (params.fullPage) {
       while (spaBody.hasChildNodes()) {
@@ -49,31 +60,34 @@ class Single_Page_Application {
       }
     }
     let activePage = document.getElementById("activePage")
-    if (activePage) {
-      const spaBody = document.getElementById('spaBody')
-      spaBody.removeChild(activePage)
-      activePage = false
-    }
+    // if (activePage) {
+    //   const spaBody = document.getElementById('spaBody')
+    //   spaBody.removeChild(activePage)
+    //   activePage = false
+    // }
     if (!activePage) {
       activePage = document.createElement('div')
       activePage.id = 'activePage'
-      this.classSwap(params,activePage)
       const spaBody = document.getElementById('spaBody')
       spaBody.appendChild(activePage)
-      this.addCss(params, 'pages')
-      this.builtCss.push(params.id)
     }
-    if (!this.builtCss.includes(params.id)) {
-      this.addCss(params)
-      this.builtCss.push(params.id)
-      this.classSwap(params,activePage)
-    } else if (this.previousCss !== params.id) {
-      this.classSwap(params,activePage)
-    }
+    this.classSwap(params,activePage)
+    this.addCss(params, 'pages')
+    this.builtCss.push(params.id)
+
+    // if (!this.builtCss.includes(params.id)) {
+    //   this.addCss(params)
+    //   this.builtCss.push(params.id)
+    //   this.classSwap(params,activePage)
+    // } else if (this.previousCss !== params.id) {
+    //   this.classSwap(params,activePage)
+    // }
     return activePage
   }
 
   buildComponent(params) {
+    params.parent = '.spa-css-'+params.id
+    // console.log('comp',params);
     if (params.preserve && document.getElementById(params.id)) {
       return false
     } else {
@@ -89,7 +103,6 @@ class Single_Page_Application {
   }
 
   addCss(params, dir) {
-
     if (!this.builtCss.includes(params.id)) {
       let styles = document.styleSheets
       const sheetToAdd = document.createElement('link')
@@ -100,16 +113,25 @@ class Single_Page_Application {
       document.getElementsByTagName('head')[0].appendChild(sheetToAdd)
       const img = document.createElement("img")
       img.onerror = function() {
-       document.body.removeChild(img);
-       spa.localizeCssSheet(params)
+        document.body.removeChild(img);
+        spa.localizeCssSheet(params)
       }
       document.body.appendChild(img)
       img.src = dir+'/'+params.id+'/'+params.id+'.css'
       this.builtCss.push(params.id)
+
+      //
+      //
+      //
+      //
+      //
+      // spa.localizeCssSheet(params, dir)
+      // this.builtCss.push(params.id)
+
     }
   }
 
-  localizeCssSheet(params) {
+  localizeCssSheet(params, dir) {
     let sheet;
     for (const i in document.styleSheets) {
       const s = document.styleSheets[i]
@@ -117,6 +139,25 @@ class Single_Page_Application {
         sheet = document.styleSheets[i]
       }
     }
+
+    // const cssDir = 'link[href="'+dir+'/'+params.id+'/'+params.id+'.css"]'
+    // console.log(cssDir);
+    // console.log(document.querySelector(cssDir));
+    // const sheet = document.querySelector(cssDir)
+
+    // let styles = document.styleSheets
+    // // console.log(styles);
+    // for (const style of styles) {
+    //   // style.id = 'style-'+params.id
+    //   if (style.href.split('/'+params.id+'.css').length > 1) {
+    //     console.log(params.id);
+    //     sheet = style
+    //   }
+    //
+    // }
+
+
+    console.log(sheet);
     const len = sheet.cssRules.length
     for (var i = 0; i < len; i++) {
       const rule = sheet.cssRules[i].cssText

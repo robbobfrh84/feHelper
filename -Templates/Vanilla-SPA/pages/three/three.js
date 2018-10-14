@@ -1,19 +1,24 @@
 spa.page.three = (META)=>{
-  spa.component.navbar({preserve: true, id: "navbar"})
+  spa.component.navbar({preserve: true, id: "navBar"})
 
   spa.buildPage(META).innerHTML += `
     <div class="navPage" id='main'>
       <h3 class='title'> Page Three </h3>
-      This is styled by two's css <br>
-      <button class='pageNavBtn navBtn-active' name="home"> Home </button>
-      <button class='pageNavBtn' name="two"> Page 2 </button>
-      <button class='pageNavBtn' name="three"> Page 3 </button>
-      <button class='pageNavBtn' name="full"> Full </button>
+      This is styled by three's css <br>
+      <button id='home-btn' class='navBtn navBtn-active' name="home"> Home </button>
+      <div>
+        <button class='navBtn' name="two"> Page 2 </button>
+        <button class='navBtn' name="three"> Page 3 </button>
+        <button class='navBtn' name="full"> Full </button>
+      </div>
     </div>
   `
 
-  set_page_to_nav = (page)=>{
-    for (const btn of document.getElementsByClassName('pageNavBtn')) {
+  set_page_to_nav = ()=>{
+    console.log('\n')
+    console.log(META);
+    for (const btn of document.querySelectorAll(META.parent+" .navBtn")) {
+      console.log('btn: ',btn);
       btn.classList.remove('navBtn-active')
       if (btn.name === spa.currentPage) {
         btn.classList.add('navBtn-active')
@@ -21,7 +26,7 @@ spa.page.three = (META)=>{
     }
   }
 
-  for (const button of document.getElementsByClassName('pageNavBtn')) {
+  for (const button of document.querySelectorAll(META.parent+" .navBtn")) {
     button.onclick = function(event){
       spa.setPage(this.name)
       set_page_to_nav(this)

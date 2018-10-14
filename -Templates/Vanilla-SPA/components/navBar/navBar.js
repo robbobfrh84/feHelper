@@ -12,9 +12,12 @@ spa.component.navbar = (META)=>{
       </div>
     </nav>
   `
-  
-  set_page_to_nav = (p)=>{
-    for (const btn of document.getElementsByClassName('navBtn')) {
+
+  set_page_to_nav = ()=>{
+    console.log('\n')
+    console.log(META);
+    for (const btn of document.querySelectorAll(META.parent+" .navBtn")) {
+      console.log('btn navbar: ',btn);
       btn.classList.remove('navBtn-active')
       if (btn.name === spa.currentPage) {
         btn.classList.add('navBtn-active')
@@ -22,12 +25,14 @@ spa.component.navbar = (META)=>{
     }
   }
 
-  for (const button of document.getElementsByClassName('navBtn')) {
+  for (const button of document.querySelectorAll(META.parent+" .navBtn")) {
     button.onclick = function(event){
       spa.setPage(this.name)
       set_page_to_nav(this)
     }
   }
+
+  console.log('navBar');
 
   set_page_to_nav()
 

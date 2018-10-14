@@ -1,5 +1,5 @@
 spa.page.home = (META)=>{
-  spa.component.navbar({preserve: true, id: "navbar"})
+  spa.component.navbar({preserve: true, id: "navBar"})
 
   spa.buildPage(META).innerHTML += `
     <div id="main" class="navPage">

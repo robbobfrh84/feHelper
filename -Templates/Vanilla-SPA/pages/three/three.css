@@ -1,9 +1,13 @@
 #main {
-  background-color: cornflowerblue;
+  /* background-color: rgba(165,42,42,0.7); */
+  background: green;
 }
 .navBtn {
   background-color: #ddd;
 }
 .navBtn-active {
   background-color: #999;
+}
+#home-btn {
+  width: 150px;
 }
