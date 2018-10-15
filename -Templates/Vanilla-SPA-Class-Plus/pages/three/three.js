@@ -2,16 +2,20 @@ spa.page.three = (META)=>{
   spa.component.navbar({preserve: true, id: "navBar"})
 
   spa.buildPage(META).innerHTML += `
-    <div class="navPage" id='main'>
-      <h3 class='title'> Page Three </h3>
-      This is styled by three's css <br>
-      <button id='home-btn' class='navBtn navBtn-active' name="home"> Home </button>
-      <div>
-        <button class='navBtn' name="two"> Page 2 </button>
-        <button class='navBtn' name="three"> Page 3 </button>
-        <button class='navBtn' name="full"> Full </button>
+    <div id="main" class="navPage-container">
+      <div class="navPage">
+        <h3 class='title'> Page Three </h3>
+        This is styled by three's css
+        <hr>
+        <button id='home-btn' class='navBtn navBtn-active' name="home"> Home </button>
+        <div>
+          <button class='navBtn' name="two"> Page 2 </button>
+          <button class='navBtn' name="three"> Page 3 </button>
+          <button class='navBtn' name="full"> Full </button>
+        </div>
       </div>
     </div>
+
   `
 
   set_page_to_nav = ()=>{

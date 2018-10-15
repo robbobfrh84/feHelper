@@ -3,7 +3,7 @@
   font-weight: lighter;
 }
 body {
-  background-color: #aaa;
+  background: url("../gfx/tx2.png");
   height: 100%;
   margin: 0;
 }
@@ -13,17 +13,24 @@ h3 {
 .float-right {
   float: right;
 }
-.navPage {
+.navPage-container {
   padding: 50px;
   padding-left: 2.5%;
   padding-right: 2.5%;
-  text-align: center;
-  max-width: 1200px;
-  margin: auto;
-  color: rgba(255,255,255,0.9);
+  color: rgba(0,0,0,0.8);
   font-size: 30px;
   overflow: scroll;
   position: absolute;
   top: 0px; right: 0; bottom: 0px; left: 0;
   z-index: -10;
+}
+.navPage {
+  max-width: 1000px;
+  text-align: center;
+  margin: auto;
+  background-color: rgba(0,0,0,0.1);
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+  min-height: 100%;
 }

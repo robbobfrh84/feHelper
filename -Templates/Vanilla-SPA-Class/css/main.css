@@ -1,0 +1,11 @@
+* {
+  font-family: sans-serif;
+  font-weight: lighter;
+}
+body {
+  background: url("../gfx/tx2.png");
+  margin: 0;
+}
+/* .page {
+  margin: 20px;
+} */
