@@ -4,13 +4,16 @@ class Single_Page_Application {
     this.page = {},
     this.component = {},
     this.builtCss = [],
-    this.wasFullPage = true
+    this.rebuildPage = true
   }
 
   start(params) {
     const spaBody = document.createElement('div')
+    const spaFullBody = document.createElement('div')
     spaBody.id = 'spaBody'
+    spaFullBody.id = 'spaFullBody'
     document.body.appendChild(spaBody)
+    document.body.appendChild(spaFullBody)
     this.onload = true
     let setPage = window.location.hash
     setPage = setPage.split('#')[1]
@@ -44,96 +47,55 @@ class Single_Page_Application {
   }
 
   buildPage(params) {
-    console.log(params);
-    // let activePage
+    const spaFullBody = document.getElementById('spaFullBody')
     const spaBody = document.getElementById('spaBody')
+
     if (params.fullPage) {
-      this.wasFullPage = true
-      while (spaBody.hasChildNodes()) {
-        spaBody.removeChild(spaBody.lastChild)
+      console.log('*FUll* page:', params);
+      while (spaFullBody.hasChildNodes()) {
+        spaFullBody.removeChild(spaFullBody.lastChild)
       }
+      return this.setSwapPage(params, spaFullBody)
+    } else {
+      console.log('-nav- page:', params);
+      let activePage = document.getElementById('activePage')
+      if (activePage) {
+        while (activePage.hasChildNodes()) {
+          activePage.removeChild(activePage.lastChild)
+        }
+      } else {
+        activePage = document.createElement('div')
+        activePage.id = 'activePage'
+        spaBody.appendChild(activePage)
+      }
+      return this.setSwapPage(params, activePage)
     }
-    // else if (!this.wasFullPage) {
-    //   console.log("----%%% } else if (!this.wasFullPage) {");
-    //
-    //   activePage = document.getElementById('activePage')
-    //   this.wipe(activePage)
-    //   // this.wipe(document.getElementById('activeFullPage'))
-    //
-    //   this.classSwap(params, activePage)
-    //   this.addCss(params, 'pages')
-    //   return activePage
-    // }
-    //else
-    if (document.getElementById('activePage')) {
-      // this.wipe(document.getElementById('activeFullPage'))
-      // activePage = document.getElementById('activePage')
-      // spaBody.removeChild(activePage)
-      spaBody.removeChild(document.getElementById('activePage'))
-
-    }
-    // activePage = document.getElementById('activePage')
-    // activePage.id = 'removeMe'
-    // this.wipe(document.getElementById('removeMe'))
-
-    // if (!params.fullPage) this.wasFullPage = false
-    // activePage = document.getElementById('activePage')
-    // if (activePage) {
-    //   spaBody.removeChild(document.getElementById('activePage'))
-    // }
-
-    const activePage = document.createElement('div')
-    // activePage.id = params.fullPage ? 'activeFullPage' : 'activePage'
-    activePage.id = 'activePage'
-    // spaBody = document.getElementById('spaBody')
-    spaBody.appendChild(activePage)
-
-
-    if (!params.fullPage) this.wasFullPage = false
 
 
 
+    // const spaBody = document.getElementById('spaBody')
     // if (params.fullPage) {
-    //   this.wasFullPage = true
     //   while (spaBody.hasChildNodes()) {
     //     spaBody.removeChild(spaBody.lastChild)
     //   }
-    // } else {
-    //   activePage = document.getElementById('activePage')
-    //   if (activePage) {
-    //     while (activePage.hasChildNodes()) {
-    //       activePage.removeChild(activePage.lastChild)
-    //     }
-    //   }
-    //   console.log(activePage);
     // }
-    // // let activePage = document.getElementById("activePage")
-    // // console.log('?',activePage);
-    // // console.log(params.fullPage, this.wasFullPage);
-    // if (!document.getElementById("activePage")) {
-    //   // if (!params.fullPage) this.wasFullPage = false
-    //   console.log('--');
-    //   activePage = document.createElement('div')
-    //   activePage.id = 'activePage'
-    //   const spaBody = document.getElementById('spaBody')
-    //   spaBody.appendChild(activePage)
+    // if (document.getElementById('activePage')) {
+    //   spaBody.removeChild(document.getElementById('activePage'))
     // }
-
-
-    this.classSwap(params, activePage)
-    this.addCss(params, 'pages')
-
-    // 🚨This push adds it when it's not needed....
-    this.builtCss.push(params.id)
-    return activePage
+    // const activePage = document.createElement('div')
+    // activePage.id = 'activePage'
+    // spaBody.appendChild(activePage)
+    // this.classSwap(params, activePage)
+    // this.addCss(params, 'pages')
+    // return activePage
   }
 
-  wipe(page) {
-    if (page) {
-      while (page.hasChildNodes()) {
-        page.removeChild(page.lastChild)
-      }
-    }
+  setSwapPage(params, page) {
+    this.classSwap(params, page)
+    this.addCss(params, 'pages')
+    spaFullBody.style.display = params.fullPage ? '' : 'none'
+    spaBody.style.display = params.fullPage ? 'none' : ''
+    return page
   }
 
   buildComponent(params) {
