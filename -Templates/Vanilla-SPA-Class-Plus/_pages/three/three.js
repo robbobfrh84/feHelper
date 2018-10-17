@@ -15,7 +15,6 @@ spa.page.three = (META)=>{
         </div>
       </div>
     </div>
-
   `
 
   set_page_to_nav = ()=>{

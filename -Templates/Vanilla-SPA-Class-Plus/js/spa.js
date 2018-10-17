@@ -3,16 +3,14 @@ class Single_Page_Application {
   constructor() {
     this.page = {},
     this.component = {},
-    this.builtCss = []
+    this.rebuildPage = true
   }
 
   start(params) {
-    const spaBody = document.createElement('div')
-    spaBody.id = 'spaBody'
-    document.body.appendChild(spaBody)
+    this.newDiv(document.body, 'spaBody')
+    this.newDiv(document.body, 'spaFullBody')
     this.onload = true
-    let setPage = window.location.hash
-    setPage = setPage.split('#')[1]
+    let setPage = window.location.hash.split('#')[1]
     window.location.hash = ''
     setPage ? this.setPage(setPage) : this.setPage(params.landingPage, true)
   }
@@ -20,11 +18,7 @@ class Single_Page_Application {
   setPage(page, onload)  {
     this.currentPage = page
     window.location.hash = '#'+page
-    const params = {
-      id: page,
-      parent: ".spa-css-"+page
-    }
-    if (onload) spa.page[page](params)
+    if (onload) this.page[page]({ id: page, parent: ".spa-css-"+page })
   }
 
   hashChange(event) {
@@ -33,40 +27,31 @@ class Single_Page_Application {
       this.currentPage = window.location.hash.split('#')[1]
     }
     if (!this.onload) {
-      const params = {
-        id: page,
-        parent: ".spa-css-"+this.currentPage
-      }
-      this.page[this.currentPage](params)
+      const cp = this.currentPage
+      this.page[cp]({ id: page, parent: ".spa-css-"+cp })
     }
     this.onload = false
   }
 
   buildPage(params) {
-    const spaBody = document.getElementById('spaBody')
+    const sfullB = document.getElementById('spaFullBody')
+    const sBody = document.getElementById('spaBody')
     if (params.fullPage) {
-      while (spaBody.hasChildNodes()) {
-        spaBody.removeChild(spaBody.lastChild)
-      }
+      while (sfullB.hasChildNodes()) { sfullB.removeChild(sfullB.lastChild) }
+      return this.setSwapPage(params, spaFullBody)
     } else {
-      const activePage = document.getElementById('activePage')
-      if (activePage) {
-        while (activePage.hasChildNodes()) {
-          activePage.removeChild(activePage.lastChild)
-        }
-      }
+      let ap = document.getElementById('activePage')
+      if (ap) { while (ap.hasChildNodes()) { ap.removeChild(ap.lastChild) } }
+      else { ap = this.newDiv(sBody, 'activePage') }
+      return this.setSwapPage(params, ap)
     }
-    let activePage = document.getElementById("activePage")
-    if (!activePage) {
-      activePage = document.createElement('div')
-      activePage.id = 'activePage'
-      const spaBody = document.getElementById('spaBody')
-      spaBody.appendChild(activePage)
-    }
-    this.classSwap(params,activePage)
-    this.addCss(params, 'pages')
-    this.builtCss.push(params.id)
-    return activePage
+  }
+
+  setSwapPage(params, page) {
+    this.classSwap(params, page)
+    spaFullBody.style.display = params.fullPage ? '' : 'none'
+    spaBody.style.display = params.fullPage ? 'none' : ''
+    return page
   }
 
   buildComponent(params) {
@@ -80,36 +65,42 @@ class Single_Page_Application {
       params.className = 'spa-css-'+params.id
       component.classList.add(params.className)
       spaBody.appendChild(component)
-      this.addCss(params, 'components')
       return component
     }
   }
 
-  addCss(params, dir) {
-    if (!this.builtCss.includes(params.id)) {
-      let styles = document.styleSheets
-      const sheetToAdd = document.createElement('link')
-      sheetToAdd.setAttribute('rel', 'stylesheet')
-      sheetToAdd.setAttribute('id', 'style-'+params.id)
-      sheetToAdd.setAttribute('type', 'text/css')
-      sheetToAdd.setAttribute('href', dir+'/'+params.id+'/'+params.id+'.css')
-      document.getElementsByTagName('head')[0].appendChild(sheetToAdd)
-      const img = document.createElement("img")
-      img.onerror = function() {
-        document.body.removeChild(img);
-        spa.localizeCssSheet(params)
+  localizeCss() {
+    for (const s of document.scripts) {
+      let dir = s.src.split('/')
+      const script = dir.pop().split('.js')[0]
+      dir = dir.join('/')+'/'+script+'.css'
+      dir = dir.split(window.location.origin)[1]
+      if (dir) {
+        dir = dir.split(window.location.pathname)[1]
+        if (['_components','_pages'].includes(dir.split('/')[0])) {
+          const sheetToAdd = document.createElement('link')
+          sheetToAdd.setAttribute('rel', 'stylesheet')
+          sheetToAdd.setAttribute('id', 'style-'+script)
+          sheetToAdd.setAttribute('type', 'text/css')
+          sheetToAdd.setAttribute('href', dir)
+          document.getElementsByTagName('head')[0].appendChild(sheetToAdd)
+          const img = document.createElement("img")
+          img.onerror = function() {
+            document.body.removeChild(img);
+            spa.localizeAllSelectors(script)
+          }
+          document.body.appendChild(img)
+          img.src = dir
+        }
       }
-      document.body.appendChild(img)
-      img.src = dir+'/'+params.id+'/'+params.id+'.css'
-      this.builtCss.push(params.id)
     }
   }
 
-  localizeCssSheet(params, dir) {
+  localizeAllSelectors(id) {
     let sheet;
     for (const i in document.styleSheets) {
       const s = document.styleSheets[i]
-      if (s.ownerNode && s.ownerNode.id === 'style-'+params.id) {
+      if (s.ownerNode && s.ownerNode.id === 'style-'+id) {
         sheet = document.styleSheets[i]
       }
     }
@@ -117,7 +108,7 @@ class Single_Page_Application {
     for (var i = 0; i < len; i++) {
       const rule = sheet.cssRules[i].cssText
       sheet.deleteRule(i)
-      sheet.insertRule('.'+params.className+' '+rule, i);
+      sheet.insertRule('.'+'spa-css-'+id+' '+rule, i);
     }
   }
 
@@ -126,6 +117,13 @@ class Single_Page_Application {
     activePage.classList.add(params.className)
     activePage.classList.remove('spa-css-'+this.previousCss)
     this.previousCss = params.id
+  }
+
+  newDiv(parent, id) {
+    const newElm = document.createElement('div')
+    newElm.id = id
+    parent.appendChild(newElm)
+    return newElm
   }
 
 }

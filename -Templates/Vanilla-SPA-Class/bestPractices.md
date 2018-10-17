@@ -3,3 +3,8 @@ Follow these guidelines to keep your Vanilla Single Page Application clear, read
 
 ...For better CSS reloading in terminal:
 `lr-http-server -c-1`
+
+### Developing rules
+
+Localized CSS:
+- For css files to be localized, they *must* be in either `compontents` or  `pages`  folders and those folders *must* sit at the root. 
