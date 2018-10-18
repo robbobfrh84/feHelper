@@ -69,46 +69,18 @@ class Single_Page_Application {
     }
   }
 
-  localizeCss(folders = ['-components','-pages']) {
-    for (const s of document.scripts) {
-      let dir = s.src.split('/')
-      const script = dir.pop().split('.js')[0]
-      dir = dir.join('/')+'/'+script+'.css'
-      dir = dir.split(window.location.origin)[1]
-      if (dir) {
-        dir = dir.split(window.location.pathname)[1]
-        if (folders.includes(dir.split('/')[0])) {
-          const sheetToAdd = document.createElement('link')
-          sheetToAdd.setAttribute('rel', 'stylesheet')
-          sheetToAdd.setAttribute('id', 'style-'+script)
-          sheetToAdd.setAttribute('type', 'text/css')
-          sheetToAdd.setAttribute('href', dir)
-          document.getElementsByTagName('head')[0].appendChild(sheetToAdd)
-          const img = document.createElement("img")
-          img.onerror = function() {
-            document.body.removeChild(img);
-            spa.localizeAllSelectors(script)
-          }
-          document.body.appendChild(img)
-          img.src = dir
+  localizeCss() {
+    for (const sheet of document.styleSheets) {
+      if (sheet.href.split('-components').length > 1
+      || sheet.href.split('-pages').length > 1) {
+        let id = sheet.href.split('/').pop();
+        const len = sheet.cssRules.length
+        for (var i = 0; i < len; i++) {
+          const rule = sheet.cssRules[i].cssText
+          sheet.deleteRule(i)
+          sheet.insertRule('.'+'spa-css-'+id.split('.css')[0]+' '+rule, i);
         }
       }
-    }
-  }
-
-  localizeAllSelectors(id) {
-    let sheet;
-    for (const i in document.styleSheets) {
-      const s = document.styleSheets[i]
-      if (s.ownerNode && s.ownerNode.id === 'style-'+id) {
-        sheet = document.styleSheets[i]
-      }
-    }
-    const len = sheet.cssRules.length
-    for (var i = 0; i < len; i++) {
-      const rule = sheet.cssRules[i].cssText
-      sheet.deleteRule(i)
-      sheet.insertRule('.'+'spa-css-'+id+' '+rule, i);
     }
   }
 
