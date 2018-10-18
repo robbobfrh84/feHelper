@@ -69,7 +69,7 @@ class Single_Page_Application {
     }
   }
 
-  localizeCss() {
+  localizeCss(folders = ['-components','-pages']) {
     for (const s of document.scripts) {
       let dir = s.src.split('/')
       const script = dir.pop().split('.js')[0]
@@ -77,7 +77,7 @@ class Single_Page_Application {
       dir = dir.split(window.location.origin)[1]
       if (dir) {
         dir = dir.split(window.location.pathname)[1]
-        if (['_components','_pages'].includes(dir.split('/')[0])) {
+        if (folders.includes(dir.split('/')[0])) {
           const sheetToAdd = document.createElement('link')
           sheetToAdd.setAttribute('rel', 'stylesheet')
           sheetToAdd.setAttribute('id', 'style-'+script)
