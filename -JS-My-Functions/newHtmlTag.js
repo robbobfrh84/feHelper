@@ -1,8 +1,8 @@
 /*******************************************************************************
-     Dynamically create complete html Tags
+     Dynamically create complete html Tags search createElement
 *******************************************************************************/
-function newTag(par, tag, attr) {
-  const parent = document.getElementById(par)
+function _newTag(par, tag, attr) {
+  const parent = par !== 'body' ? document.getElementById(par) : document.body
   const child = document.createElement(tag)
   for (const att in attr) {
     if (att === 'e') {
