@@ -9,8 +9,14 @@ rgbR = ()=>{
   return 'rgb('+random(0,255)+', '+random(0,255)+', '+random(0,255)+')';
 }
 
+// random rgba() NOTE: this adds opacity.
 rgbAR = (a)=>{
   return 'rgb('+random(0,255)+', '+random(0,255)+', '+random(0,255)+','+a+')';
+}
+
+// returns -1 or 1
+function _PN(){
+  return Math.random() < 0.5 ? -1 : 1
 }
 
 //Returns the base-16 equivalent 0-16777215 in base 10.
