@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title> Fetch </title>
+  <style media="screen">
+    * { font-size: 20px; margin: 5px; }
+    #apiView { width: 90%; height: 500px;}
+  </style>
+</head>
+
+<body>
+
+  <h3> Fetch API: </h3>
+
+  <button onClick="get()"> ❇️ GET request </button>
+  <br>
+  <button onClick="get(true)"> 🥴 Bad GET request </button>
+  <hr>
+
+  <button onClick="post()"> 🔵 POST request </button>
+  <input id="message" value="Hi From Client">
+
+  <hr>
+  <button onClick="omdb()"> 🎞 omdb API request </button>
+  <hr>
+
+  <textarea id="apiView"></textarea>
+
+</body>
+
+<script type="text/javascript">
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  📜 Request handlers 📜
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+  const API = "http://localhost:8000/api"
+  const omdbAPI = "http://www.omdbapi.com/?t=Little+Big+Man&apikey=36826a66"
+
+  const fetch_handler = function(url, method, data) {
+
+    const init = { method }
+
+    if (method === "POST") {
+      init.headers = { "Content-Type": "text/plain" },
+      init.body = JSON.stringify(data)
+    }
+
+    console.log("Your init object: ", init)
+
+    fetch(url, init)
+      .then(res => res.json())
+      .then(data => {
+        console.log("👍 data :", data)
+        handle_response(data)
+      })
+      .catch(err => console.log("🚨 Error caught :", err))
+      .finally(() => console.log("🤗 finally, I will always log") )
+  }
+
+
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    💥 Event handlers 💥
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+  function get(bad){
+    if (bad) {
+      const badurl = API+"oops"
+      fetch_handler(badurl, 'GET')
+    } else {
+      fetch_handler(API, 'GET')
+    }
+  }
+
+  function post() {
+    const msg = message.value
+    fetch_handler(API, 'POST', { message: message.value } )
+  }
+
+  function omdb() {
+    fetch_handler(omdbAPI, 'GET')
+  }
+
+  function handle_response(data){
+    console.log('---', data)
+    apiView.innerHTML = JSON.stringify(data, null, '\t')
+  }
+
+</script>
+
+</html>
