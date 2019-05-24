@@ -10,12 +10,13 @@ class Single_Page_Application {
     this.newDiv(document.body, 'spaBody')
     this.newDiv(document.body, 'spaFullBody')
     this.landingPage = params.landingPage
-    this.setPage(window.location.hash.split('#')[1] || this.landingPage)
+    this.currentPage = window.location.hash.split('#')[1] || this.landingPage
+    this.setPage(this.currentPage)
   }
 
   setPage(page)  {
     this.currentPage = page
-    if (page === this.landingPage) history.replaceState(null, null, ' ')
+    if (page === this.landingPage) history.pushState(null, null, " ")
     else window.location.hash = '#'+page
     this.page[page]({ id: page, parent: ".spa-css-"+page })
   }
@@ -24,7 +25,7 @@ class Single_Page_Application {
     let page = window.location.hash.split('#')[1] || this.landingPage
     if (page !== this.currentPage) {
       this.currentPage = page
-      this.setPage(page)
+      this.page[page]({ id: page, parent: ".spa-css-"+page })
     }
   }
 
