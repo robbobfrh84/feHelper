@@ -9,28 +9,23 @@ class Single_Page_Application {
   start(params) {
     this.newDiv(document.body, 'spaBody')
     this.newDiv(document.body, 'spaFullBody')
-    this.onload = true
-    let setPage = window.location.hash.split('#')[1]
-    window.location.hash = ''
-    setPage ? this.setPage(setPage) : this.setPage(params.landingPage, true)
+    this.landingPage = params.landingPage
+    this.setPage(window.location.hash.split('#')[1] || this.landingPage)
   }
 
-  setPage(page, onload)  {
+  setPage(page)  {
     this.currentPage = page
-    window.location.hash = '#'+page
-    if (onload) this.page[page]({ id: page, parent: ".spa-css-"+page })
+    if (page === this.landingPage) history.replaceState(null, null, ' ')
+    else window.location.hash = '#'+page
+    this.page[page]({ id: page, parent: ".spa-css-"+page })
   }
 
   hashChange(event) {
-    const page = window.location.hash.split('#')[1]
-    if (window.location.hash !== '#'+this.currentPage) {
-      this.currentPage = window.location.hash.split('#')[1]
+    let page = window.location.hash.split('#')[1] || this.landingPage
+    if (page !== this.currentPage) {
+      this.currentPage = page
+      this.setPage(page)
     }
-    if (!this.onload) {
-      const cp = this.currentPage
-      this.page[cp]({ id: page, parent: ".spa-css-"+cp })
-    }
-    this.onload = false
   }
 
   buildPage(params) {
