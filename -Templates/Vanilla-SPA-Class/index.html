@@ -1,39 +1,38 @@
 <!DOCTYPE html><html>
 <head>
-  <title> Vanilla SPA Class </title>
+  <title> Vanilla SPA </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Single Page Application Class -->
-  <script src='js/spa.js'></script>
+  <script src='js/SPA.js'></script>
   <!-- graphics  -->
   <link rel="shortcut icon" href="gfx/cog.png"/>
   <!-- css -->
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="-components/navBar/navBar.css">
-  <link rel="stylesheet" href="-components/footer/footer.css">
-  <link rel="stylesheet" href="-pages/home/home.css">
-  <link rel="stylesheet" href="-pages/two/two.css">
-  <link rel="stylesheet" href="-pages/full/full.css">
+  <link rel="stylesheet" href="main.css">
 </head>
-<body></body>
+<body>
+  <div id="spaBody"></div>
+</body>
+
 <script>
 
-const spa = new Single_Page_Application
 window.onload = ()=>{
-  spa.localizeCss()
-  spa.start({
-    landingPage: 'home'
-  })
+  const spa =  new SPA()
+  spa._start({ landingPage: 'home' })
 }
-window.onhashchange = (event)=>{ spa.hashChange(event) }
 
 </script>
-<!-- components -->
-<script src='-components/navBar/navBar.js'></script>
-<script src='-components/footer/footer.js'></script>
-<!-- pages -->
-<script src='-pages/home/home.js'></script>
-<script src='-pages/two/two.js'></script>
-<script src='-pages/full/full.js'></script>
+
+<script src='components/_navbar/navbar.js'></script>
+
+<link rel="stylesheet" href="components/page_home/home.css">
+<script src='components/page_home/home.js'></script>
+
+<link rel="stylesheet" href="components/page_two/two.css">
+<script src='components/page_two/two.js'></script>
+
+<link rel="stylesheet" href="components/page_three/three.css">
+<script src='components/page_three/three.js'></script>
+
+<script src='components/fullpage_full/full.js'></script>
 
 </html>

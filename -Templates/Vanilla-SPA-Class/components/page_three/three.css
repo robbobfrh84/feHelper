@@ -1,0 +1,9 @@
+#three #navbar {
+  background-color: cornflowerblue;
+}
+
+@media (max-width: 750px) {
+  #three #navbar {
+    background-color: orange;
+  }
+}
