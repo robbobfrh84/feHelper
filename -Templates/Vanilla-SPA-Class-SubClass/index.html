@@ -16,12 +16,25 @@
 <script>
 
 window.onload = ()=>{
+
   const spa =  new SPA()
-  spa._start({ landingPage: 'home' })
+
+  spa._start({
+    landingPage: "Home",
+    components: {
+      "Home"    :    new Home,
+      "Navbar"  :    new Navbar,
+      "Two"     :    new Two,
+      "Three"   :    new Three,
+      "Full"    :    new Full
+    }
+  })
+
 }
 
 </script>
 
+<link rel="stylesheet" href="components//_navbar/navbar.css">
 <script src='components/_navbar/navbar.js'></script>
 
 <link rel="stylesheet" href="components/page_home/home.css">
@@ -33,6 +46,6 @@ window.onload = ()=>{
 <link rel="stylesheet" href="components/page_three/three.css">
 <script src='components/page_three/three.js'></script>
 
-<script src='components/fullpage_full/full.js'></script>
+<script src='components/pagefull_full/full.js'></script>
 
 </html>

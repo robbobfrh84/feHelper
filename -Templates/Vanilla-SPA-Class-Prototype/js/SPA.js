@@ -10,23 +10,27 @@ class SPA {
     this._landingPage = landingPage
     this._currentPage = landingPage
     window.addEventListener("hashchange", ()=>{
-      if (window.location.hash.split("#")[1] !== this._currentPage) {
-        this._go(window.location.hash.split("#")[1])
-      }
+      let hash = window.location.hash.split("#")[1] || this._landingPage
+      if (hash === this._landingPage) { history.replaceState(null, null, " ")
+      } else { window.location.hash = '#'+hash }
+      this._currentPage = hash
+      this._go(hash)
     })
-    this._go()
+    this._go(window.location.hash.split("#")[1])
   }
 
   _go(page) {
     this._currentPage = page || this._currentPage
     this._body.innerHTML = this._component(this._currentPage)
     this._render_components()
-    window.location.hash = this._currentPage
   }
 
   _component(comp) {
     this._render.unshift(comp)
     this[comp].spa = this
+    this[comp]._update = this._update.bind(this)
+    this[comp]._component = this._component.bind(this)
+    this[comp]._data = this._data
     return `<comp-${comp}>${this[comp].html.apply(this[comp])}</comp-${comp}>`
   }
 

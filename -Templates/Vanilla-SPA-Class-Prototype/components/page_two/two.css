@@ -2,6 +2,10 @@
   background-color: firebrick;
 }
 
+#two {
+  background-color: #ccc;
+}
+
 @media (max-width: 750px) {
   #two #navbar {
     background-color: purple;
