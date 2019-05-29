@@ -70,13 +70,7 @@ class SPA {
       str = str.split(/\(|\)|'|"| |,/).filter(i=>i)
       const func = str.shift()
       elm.addEventListener(htmlEvent, ()=>{
-        try {
-          this[comp][func].apply(this[comp], this._args(str))
-        } catch(err) {
-          if (err.message !== "Cannot read property 'apply' of undefined"){
-            throw(err)
-          }
-        }
+        this[comp][func].apply(this[comp], this._args(str))
       })
       elm.removeAttribute("spa")
     })
