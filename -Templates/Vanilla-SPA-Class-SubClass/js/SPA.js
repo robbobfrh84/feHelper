@@ -40,7 +40,7 @@ class SPA {
     return `<comp-${comp}>${content}</comp-${comp}>`
   }
 
-  _update = (data) => {
+  _update(data) {
     for (const key in data) {
       this._data[key] = data[key]
     }
@@ -64,7 +64,7 @@ class SPA {
     })
   }
 
-  _spaEvent(comp, elms){
+  _spaEvent(comp, elms) {
     elms.querySelectorAll('[spa]').forEach((elm)=>{
       let [ htmlEvent, str ] = elm.getAttribute("spa").split("=")
       str = str.split(/\(|\)|'|"| |,/).filter(i=>i)
