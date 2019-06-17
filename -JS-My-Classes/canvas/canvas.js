@@ -15,9 +15,10 @@ class canvas {
     this.ctx.canvas.height = height
   }
 
-  line (startX, startY, endX, endY, strokeColor, lineWidth) {
+  line (startX, startY, endX, endY, strokeColor, lineWidth, lineCap) {
     this.ctx.beginPath()
     this.ctx.moveTo(startX, startY)
+    if (lineCap) this.ctx.lineCap = lineCap
     this.ctx.lineTo(endX,endY)
     this.paint( lineWidth || 1, strokeColor || 'black' )
     this.ctx.fill()
